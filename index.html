@@ -1,0 +1,67 @@
+<html> <!--Simulates the card game 'Memory' using photos-->
+  <head>
+		<link rel="stylesheet" href="style.css" type="text/css">
+		<script src="http://code.jquery.com/jquery-1.7.1.js"></script>
+		<script> //remember to addBorder
+			$(Document).ready(function(){
+				$('#refresh input:submit').click(function() {
+					var myAlbum = new Array; //add a while loop var i =0; var j=0 (i<10){myAlbum[i]=("images/album/" + "j" + ".jpeg"); i++; if(i%2!=0){j++};
+						myAlbum[0] = "images/album/0.jpeg";
+						myAlbum[1] = "images/album/0.jpeg";
+						myAlbum[2] = "images/album/1.jpeg";
+						myAlbum[3] = "images/album/1.jpeg";
+						myAlbum[4] = "images/album/2.jpeg";
+						myAlbum[5] = "images/album/2.jpeg";
+						myAlbum[6] = "images/album/3.jpeg";
+						myAlbum[7] = "images/album/3.jpeg";
+						myAlbum[8] = "images/album/4.jpeg";
+						myAlbum[9] = "images/album/4.jpeg";
+						myAlbum[10] = "images/album/5.jpeg";
+						myAlbum[11] = "images/album/5.jpeg";
+						myAlbum[12] = "images/album/6.jpeg";
+						myAlbum[13] = "images/album/6.jpeg";
+						myAlbum[14] = "images/album/7.jpeg";
+						myAlbum[15] = "images/album/7.jpeg";
+					Array.prototype.shuffle = function shuffle(){
+						var tempSlot;
+						var randomNumber;
+						for (var i = 0; i != this.length; i++){
+							randomNumber = Math.floor(Math.random() * this.length);
+							tempSlot = this[i];
+							this[i] = this[randomNumber];
+							this[randomNumber] = tempSlot;	
+							}
+						}
+					var shuffledAlbum = myAlbum.shuffle();
+					for (i=0; i<shuffledAlbum.length; i++) {
+						var img = shuffledAlbum[i];
+						img.style.height = "100px";
+						img.style.width = "150px";
+						document.getElementById("photo_container").appendChild(img);
+						
+					}
+					
+				})
+				
+
+			})
+			
+		</script>
+	</head>
+	
+	<div id="body">
+		<div id="container">
+			<div id="invisible_box">
+				<div id="card"><img src="images/card.jpg" style="width: 100px; height: 150px"></div> <!--style="height: 100px;" style="width: 150"-->
+		
+				<div id="photo_container"></div> <!--script callback function appends elements from shuffledAlbum-->
+		
+				<div id="refresh" ><input type="submit" value="Refresh" id="Refresh_button"></input></div>
+			</div>
+		</div>
+		
+	</div>
+	
+	
+	
+</html>
