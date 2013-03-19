@@ -1,10 +1,10 @@
 <html> <!--Simulates the card game 'Memory' using photos-->
-  <head>
+	<head>
 		<link rel="stylesheet" href="style.css" type="text/css">
 		<script src="http://code.jquery.com/jquery-1.7.1.js"></script>
-		<script> //remember to addBorder
+		<script type="text/javascript"> //remember to addBorder
 			$(document).ready(function(){
-					var myAlbum = new Array(); //add a while loop var i =0; var j=0 (i<10){myAlbum[i]=("images/album/" + "j" + ".jpeg"); i++; if(i%2!=0){j++};
+				var myAlbum = new Array(); //add a while loop var i =0; var j=0 (i<10){myAlbum[i]=("images/album/" + "j" + ".jpeg"); i++; if(i%2!=0){j++};
 						myAlbum[0] = new Image();
 						myAlbum[0].src = "images/album/0.jpg";
 						
@@ -52,8 +52,6 @@
 						
 						myAlbum[15] = new Image();
 						myAlbum[15].src = "images/album/7.jpg";
-						
-
 					Array.prototype.shuffle = function shuffle(){
 						var tempSlot;
 						var randomNumber;
@@ -65,27 +63,28 @@
 							}
 								return this;
 					};
-					$('#refresh input:submit').click(function() {
+				$('#refresh input:submit').click(function() {
 					var leftovers = $("#photo_container").children().length;
-					while (leftovers > 0){ //I don't want to clean the div the first time through before loading it up
-						for (i=0; i<myAlbum.length; i++){
-						var leftimg = myAlbum[i];
-						document.getElementById("photo_container").removeChild(leftimg); //gives back an anonymous function error
+					if (leftovers > 0){
+						//for (i=0; i<myAlbum.length; i++){
+						//var leftimg = myAlbum[i];
+						$('.photo_content').remove();
 						}
-					}
 					var shuffledAlbum = myAlbum.shuffle();
 					for (i=0; i<shuffledAlbum.length; i++) {
 						var img = shuffledAlbum[i];
 						img.style.height = "100px";
 						img.style.width = "150px";
-						document.getElementById("photo_container").appendChild(img);
-						}
-					});
+						var element = document.createElement('div');
+						element.className = "photo_content";
+						element.appendChild(img); //I need to add a class
+						document.getElementById("photo_container").appendChild(element);
+					}
+					
+				});
 				
-			})
-			
-		</script>
-		<script>
+
+			});
 			
 		</script>
 	</head>
