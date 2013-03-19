@@ -2,26 +2,59 @@
   <head>
 		<link rel="stylesheet" href="style.css" type="text/css">
 		<script src="http://code.jquery.com/jquery-1.7.1.js"></script>
-		<script> //remember to addBorder to images
+		<script> //remember to addBorder
 			$(document).ready(function(){
-				$('#refresh input:submit').click(function() { //Failing to execute on clicking the refresh button. I've tried simpler tests that have also failed. This callback function seems to be the bug
-					var myAlbum = new Array; //add a while loop var i =0; var j=0 (i<10){myAlbum[i]=("images/album/" + "j" + ".jpeg"); i++; if(i%2!=0){j++};
-						myAlbum[0] = "images/album/0.jpeg";
-						myAlbum[1] = "images/album/0.jpeg";
-						myAlbum[2] = "images/album/1.jpeg";
-						myAlbum[3] = "images/album/1.jpeg";
-						myAlbum[4] = "images/album/2.jpeg";
-						myAlbum[5] = "images/album/2.jpeg";
-						myAlbum[6] = "images/album/3.jpeg";
-						myAlbum[7] = "images/album/3.jpeg";
-						myAlbum[8] = "images/album/4.jpeg";
-						myAlbum[9] = "images/album/4.jpeg";
-						myAlbum[10] = "images/album/5.jpeg";
-						myAlbum[11] = "images/album/5.jpeg";
-						myAlbum[12] = "images/album/6.jpeg";
-						myAlbum[13] = "images/album/6.jpeg";
-						myAlbum[14] = "images/album/7.jpeg";
-						myAlbum[15] = "images/album/7.jpeg";
+				$('#refresh input:submit').click(function() {
+					var myAlbum = new Array(); //add a while loop var i =0; var j=0 (i<10){myAlbum[i]=("images/album/" + "j" + ".jpeg"); i++; if(i%2!=0){j++};
+						myAlbum[0] = new Image();
+						myAlbum[0].src = "images/album/0.jpg";
+						
+						myAlbum[1] = new Image();
+						myAlbum[1].src = "images/album/0.jpg";
+						
+						myAlbum[2] = new Image();
+						myAlbum[2].src = "images/album/1.jpg";
+						
+						myAlbum[3] = new Image();
+						myAlbum[3].src = "images/album/1.jpg";
+						
+						myAlbum[4] = new Image();
+						myAlbum[4].src = "images/album/2.jpg";
+					
+						myAlbum[5] = new Image();
+						myAlbum[5].src = "images/album/2.jpg";
+						
+						myAlbum[6] = new Image();
+						myAlbum[6].src = "images/album/3.jpg";
+						
+						myAlbum[7] = new Image();
+						myAlbum[7].src = "images/album/3.jpg";
+						
+						myAlbum[8] = new Image();
+						myAlbum[8].src = "images/album/4.jpg";
+						
+						myAlbum[9] = new Image();
+						myAlbum[9].src = "images/album/4.jpg";
+						
+						myAlbum[10] = new Image();
+						myAlbum[10].src = "images/album/5.jpg";
+						
+						myAlbum[11] = new Image();
+						myAlbum[11].src = "images/album/5.jpg";
+						
+						myAlbum[12] = new Image();
+						myAlbum[12].src = "images/album/6.jpg";
+						
+						myAlbum[13] = new Image();
+						myAlbum[13].src = "images/album/6.jpg";
+						
+						myAlbum[14] = new Image();
+						myAlbum[14].src = "images/album/7.jpg";
+						
+						myAlbum[15] = new Image();
+						myAlbum[15].src = "images/album/7.jpg";
+						
+
 					Array.prototype.shuffle = function shuffle(){
 						var tempSlot;
 						var randomNumber;
@@ -31,6 +64,7 @@
 							this[i] = this[randomNumber];
 							this[randomNumber] = tempSlot;	
 							}
+								return this;
 						}
 					var shuffledAlbum = myAlbum.shuffle();
 					for (i=0; i<shuffledAlbum.length; i++) {
