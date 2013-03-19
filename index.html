@@ -4,7 +4,6 @@
 		<script src="http://code.jquery.com/jquery-1.7.1.js"></script>
 		<script> //remember to addBorder
 			$(document).ready(function(){
-				$('#refresh input:submit').click(function() {
 					var myAlbum = new Array(); //add a while loop var i =0; var j=0 (i<10){myAlbum[i]=("images/album/" + "j" + ".jpeg"); i++; if(i%2!=0){j++};
 						myAlbum[0] = new Image();
 						myAlbum[0].src = "images/album/0.jpg";
@@ -65,20 +64,28 @@
 							this[randomNumber] = tempSlot;	
 							}
 								return this;
+					};
+					$('#refresh input:submit').click(function() {
+					var leftovers = $("#photo_container").children().length;
+					while (leftovers > 0){ //I don't want to clean the div the first time through before loading it up
+						for (i=0; i<myAlbum.length; i++){
+						var leftimg = myAlbum[i];
+						document.getElementById("photo_container").removeChild(leftimg); //gives back an anonymous function error
 						}
+					}
 					var shuffledAlbum = myAlbum.shuffle();
 					for (i=0; i<shuffledAlbum.length; i++) {
 						var img = shuffledAlbum[i];
 						img.style.height = "100px";
 						img.style.width = "150px";
 						document.getElementById("photo_container").appendChild(img);
-						
-					}
-					
-				})
+						}
+					});
 				
-
 			})
+			
+		</script>
+		<script>
 			
 		</script>
 	</head>
