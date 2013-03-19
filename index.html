@@ -3,7 +3,7 @@
 		<link rel="stylesheet" href="style.css" type="text/css">
 		<script src="http://code.jquery.com/jquery-1.7.1.js"></script>
 		<script> //remember to addBorder to images
-			$(Document).ready(function(){
+			$(document).ready(function(){
 				$('#refresh input:submit').click(function() { //Failing to execute on clicking the refresh button. I've tried simpler tests that have also failed. This callback function seems to be the bug
 					var myAlbum = new Array; //add a while loop var i =0; var j=0 (i<10){myAlbum[i]=("images/album/" + "j" + ".jpeg"); i++; if(i%2!=0){j++};
 						myAlbum[0] = "images/album/0.jpeg";
