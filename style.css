@@ -1,0 +1,46 @@
+#container{
+  width: 900px;
+	height: 800px;
+	color: #83b8b3;
+    margin-left: 24px;
+    border: 1px solid #eee;
+    padding: 12px;
+    float: left;
+    position: relative;
+    border-radius: 10px;
+    box-shadow: 0 1px 5px #FFFFFF;
+    background: #333333;
+}
+
+#invisible_box{
+	width: 800px;
+	height: 700px;
+	position: relative;
+	top: 50px;
+	left: 50px;
+}
+
+#card{
+	display: inline-block;
+	width: 150px;
+	height: 100px;
+	position: absolute;
+	padding: 12px;
+	transform: rotate(90deg);
+	-ms-transform: rotate(90deg);
+	-moz-transform:rotate(90deg);
+	-webkit-transform:rotate(90deg);
+	-o-transform:rotate(90deg);
+}
+
+#photo_container{
+	position: absolute;
+	top:400px;
+	left:350px;
+}
+
+#refresh{
+	position: absolute;
+	bottom: 0px;
+	left: 350px;
+}
