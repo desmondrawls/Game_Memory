@@ -4,6 +4,9 @@
 		<script src="http://code.jquery.com/jquery-1.7.1.js"></script>
 		<script type="text/javascript"> //remember to addBorder
 			$(document).ready(function(){
+				//var card = $('<img/>').attr({'id': 'cardpic', 'src': 'images/card.jpg'}).appendTo($('#photo_container'));
+				//var card = new Image();
+				//card.src = "images/card.jpg";
 				var myAlbum = new Array(); //add a while loop var i =0; var j=0 (i<10){myAlbum[i]=("images/album/" + "j" + ".jpeg"); i++; if(i%2!=0){j++};
 						myAlbum[0] = new Image();
 						myAlbum[0].src = "images/album/0.jpg";
@@ -52,6 +55,55 @@
 						
 						myAlbum[15] = new Image();
 						myAlbum[15].src = "images/album/7.jpg";
+						
+					var cardAlbum = new Array();
+						cardAlbum[0] = new Image();
+						cardAlbum[0].src = "images/card.jpg";
+						
+						cardAlbum[1] = new Image();
+						cardAlbum[1].src = "images/card.jpg";
+						
+						cardAlbum[2] = new Image();
+						cardAlbum[2].src = "images/card.jpg";
+						
+						cardAlbum[3] = new Image();
+						cardAlbum[3].src = "images/card.jpg";
+						
+						cardAlbum[4] = new Image();
+						cardAlbum[4].src = "images/card.jpg";
+					
+						cardAlbum[5] = new Image();
+						cardAlbum[5].src = "images/card.jpg";
+						
+						cardAlbum[6] = new Image();
+						cardAlbum[6].src = "images/card.jpg";
+						
+						cardAlbum[7] = new Image();
+						cardAlbum[7].src = "images/card.jpg";
+						
+						cardAlbum[8] = new Image();
+						cardAlbum[8].src = "images/card.jpg";
+						
+						cardAlbum[9] = new Image();
+						cardAlbum[9].src = "images/card.jpg";
+						
+						cardAlbum[10] = new Image();
+						cardAlbum[10].src = "images/card.jpg";
+						
+						cardAlbum[11] = new Image();
+						cardAlbum[11].src = "images/card.jpg";
+						
+						cardAlbum[12] = new Image();
+						cardAlbum[12].src = "images/card.jpg";
+						
+						cardAlbum[13] = new Image();
+						cardAlbum[13].src = "images/card.jpg";
+						
+						cardAlbum[14] = new Image();
+						cardAlbum[14].src = "images/card.jpg";
+						
+						cardAlbum[15] = new Image();
+						cardAlbum[15].src = "images/card.jpg";
 					Array.prototype.shuffle = function shuffle(){
 						var tempSlot;
 						var randomNumber;
@@ -68,16 +120,24 @@
 					if (leftovers > 0){
 						//for (i=0; i<myAlbum.length; i++){
 						//var leftimg = myAlbum[i];
-						$('.photo_content').remove();
+						$('.flip_content').remove();
 						}
 					var shuffledAlbum = myAlbum.shuffle();
-					for (i=0; i<shuffledAlbum.length; i++) {
+					for (i=0; i<shuffledAlbum.length; i++) {  //make sure images are 100 x 150
 						var img = shuffledAlbum[i];
-						img.style.height = "100px";
-						img.style.width = "150px";
+						var card = cardAlbum[i];
+						var front = document.createElement('div');
+						front.className = "front";
+						front.appendChild(card); 
+						var back = document.createElement('div')
+						back.className="back";
+						back.appendChild(img);
 						var element = document.createElement('div');
-						element.className = "photo_content";
-						element.appendChild(img); //I need to add a class
+						element.className="flip_content";
+						element.appendChild(front);
+						element.appendChild(back);
+						//('.back').hide();
+						//('.front').show();
 						document.getElementById("photo_container").appendChild(element);
 					}
 					
@@ -87,17 +147,23 @@
 			});
 			
 		</script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+			$('.flip_content').click(function(){
+				//event.preventDefault();
+				$(this).child($('.back')).hide();
+				})
+			})
+		</script>
 	</head>
 	
 	<div id="body">
 		<div id="container">
-			<div id="invisible_box">
-				<div id="card"><img src="images/card.jpg" style="width: 100px; height: 150px"></div> <!--style="height: 100px;" style="width: 150"-->
+				<!--<div id="card"></div> <!--style="height: 100px;" style="width: 150"-->
 		
 				<div id="photo_container"></div> <!--script callback function appends elements from shuffledAlbum-->
 		
-				<div id="refresh" ><input type="submit" value="Refresh" id="Refresh_button"></input></div>
-			</div>
+				<div id="refresh" ><input type="submit" value="Reset" id="Refresh_button"></input></div>
 		</div>
 		
 	</div>
