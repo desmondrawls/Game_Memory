@@ -118,13 +118,12 @@
 				$('#refresh input:submit').click(function() {
 					var leftovers = $("#photo_container").children().length;
 					if (leftovers > 0){
-						//for (i=0; i<myAlbum.length; i++){
-						//var leftimg = myAlbum[i];
 						$('.flip_content').remove();
 						}
 					var shuffledAlbum = myAlbum.shuffle();
 					for (i=0; i<shuffledAlbum.length; i++) {  //make sure images are 100 x 150
 						var img = shuffledAlbum[i];
+						img.className="deep_img";
 						var card = cardAlbum[i];
 						var front = document.createElement('div');
 						front.className = "front";
@@ -136,7 +135,7 @@
 						element.className="flip_content";
 						element.appendChild(front);
 						element.appendChild(back);
-						//('.back').hide();
+						$('.deep_img').hide();
 						//('.front').show();
 						document.getElementById("photo_container").appendChild(element);
 					}
@@ -146,6 +145,7 @@
 
 			});
 			
+<<<<<<< HEAD
 		</script> 
 		<script type="text/javascript"> //TROUBLESPOT
 			$(document).ready(function(){
@@ -154,6 +154,43 @@
 				$(this).child($('.back')).hide();
 				})
 			})
+=======
+		</script>
+		<script type="text/javascript">
+		$(document).ready(function(){
+			var temp_pusher = new Array();
+    		function pause(milliseconds) {
+				var dt = new Date();
+				while ((new Date()) - dt <= milliseconds) { /* Do nothing */ }
+			}
+    		$("#photo_container").on('click', '.flip_content', function(){
+				//var this_front = $(this).find($('.front'));
+				//var this_back = $(this).find($('.back'));
+				//this_back.show();
+				var this_img = $(this).find($('.deep_img'));
+				this_img.show();
+				var this_src = this_img.attr('src');
+				//window.alert (this_src);
+				pause(1000);
+				if (temp_pusher.length>0){
+					temp_pusher.push(this_src);
+					//temp_pusher.push(this_img);
+					console.log(temp_pusher[0])
+					if (temp_pusher[0] == temp_pusher[1]){
+						window.alert("SAME");
+						temp_pusher.pop();
+						temp_pusher.pop();
+					}
+					else {
+						window.alert("NOT THE SAME");
+						temp_pusher.pop();
+						temp_pusher.pop();
+					}
+				}
+				else {temp_pusher.push(this_img)};
+			});
+		});
+>>>>>>> SRC woes
 		</script>
 	</head>
 	
@@ -163,6 +200,8 @@
 		
 				<div id="photo_container"></div> <!--script callback function appends elements from shuffledAlbum-->
 		
+				<div id="dump"></div>
+				
 				<div id="refresh" ><input type="submit" value="Reset" id="Refresh_button"></input></div>
 		</div>
 		
