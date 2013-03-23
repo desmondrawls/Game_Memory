@@ -1,12 +1,9 @@
-<html> <!--Simulates the card game 'Memory' using photos-->
+<html> <!--Simulates the card game 'Memory' using photos of furniture I built for my Sister-->
 	<head>
 		<link rel="stylesheet" href="style.css" type="text/css">
 		<script src="http://code.jquery.com/jquery-1.7.1.js"></script>
-		<script type="text/javascript"> //remember to addBorder
+		<script type="text/javascript">
 			$(document).ready(function(){
-				//var card = $('<img/>').attr({'id': 'cardpic', 'src': 'images/card.jpg'}).appendTo($('#photo_container'));
-				//var card = new Image();
-				//card.src = "images/card.jpg";
 				var myAlbum = new Array(); //add a while loop var i =0; var j=0 (i<10){myAlbum[i]=("images/album/" + "j" + ".jpeg"); i++; if(i%2!=0){j++};
 						myAlbum[0] = new Image();
 						myAlbum[0].src = "images/album/0.jpg";
@@ -115,15 +112,15 @@
 							}
 								return this;
 					};
-				$('#refresh input:submit').click(function() {
+				$('.refresh').on('click', '#Refresh_button', function() {
 					var leftovers = $("#photo_container").children().length;
 					if (leftovers > 0){
 						$('.flip_content').remove();
 						}
 					var shuffledAlbum = myAlbum.shuffle();
-					for (i=0; i<shuffledAlbum.length; i++) {  //make sure images are 100 x 150
+					for (i=0; i<shuffledAlbum.length; i++) { 
 						var img = shuffledAlbum[i];
-						img.className="deep_img";
+						img.className="deep_img"; //used to find the img in the second script
 						var card = cardAlbum[i];
 						var front = document.createElement('div');
 						front.className = "front";
@@ -134,75 +131,65 @@
 						var element = document.createElement('div');
 						element.className="flip_content";
 						element.appendChild(front);
-						element.appendChild(back);
-						$('.deep_img').hide();
-						//('.front').show();
+						element.appendChild(back); //back is on top because it was loaded last
 						document.getElementById("photo_container").appendChild(element);
 					}
-					
+					$('.deep_img').hide();
+					(this).innerHTML = 'Reshuffle'; //changes shuffle to reshuffle
+					(this).parentNode.setAttribute("class", "new_refresh"); //re-centers the new button
 				});
 				
 
 			});
 			
-<<<<<<< HEAD
-		</script> 
-		<script type="text/javascript"> //TROUBLESPOT
-			$(document).ready(function(){
-			$('.flip_content').click(function(){
-				//event.preventDefault();
-				$(this).child($('.back')).hide();
-				})
-			})
-=======
 		</script>
 		<script type="text/javascript">
 		$(document).ready(function(){
 			var temp_pusher = new Array();
-    		function pause(milliseconds) {
-				var dt = new Date();
-				while ((new Date()) - dt <= milliseconds) { /* Do nothing */ }
-			}
     		$("#photo_container").on('click', '.flip_content', function(){
-				//var this_front = $(this).find($('.front'));
-				//var this_back = $(this).find($('.back'));
-				//this_back.show();
-				var this_img = $(this).find($('.deep_img'));
+				var this_img = $(this).find('.deep_img');
 				this_img.show();
 				var this_src = this_img.attr('src');
-				//window.alert (this_src);
-				pause(1000);
-				if (temp_pusher.length>0){
-					temp_pusher.push(this_src);
-					//temp_pusher.push(this_img);
-					console.log(temp_pusher[0])
-					if (temp_pusher[0] == temp_pusher[1]){
-						window.alert("SAME");
+				var this_str = String(this_src);
+				temp_pusher.push(this_str);
+				temp_pusher.push(this_img);
+				console.log(temp_pusher[0]);
+				console.log(temp_pusher[1]);
+				console.log(temp_pusher[2]);
+				console.log(temp_pusher[3]);
+				//window.alert (this_str);
+				console.log(this_str);
+				setTimeout(function(){
+				if (temp_pusher.length>3){
+					if (temp_pusher[0] == temp_pusher[2]){ //if the two clicked images are the same l
+						//window.alert("SAME");
+						temp_pusher.pop();
+						temp_pusher.pop();
 						temp_pusher.pop();
 						temp_pusher.pop();
 					}
 					else {
-						window.alert("NOT THE SAME");
-						temp_pusher.pop();
-						temp_pusher.pop();
+						//window.alert("NOT THE SAME");
+						temp_pusher.pop().hide(); //hide image from myAlbum
+						temp_pusher.pop(); //pop off src string for image from myAlbum
+						temp_pusher.pop().hide(); //hide image from myAlbum
+						temp_pusher.pop(); //pop off src string for image from myAlbum
 					}
 				}
-				else {temp_pusher.push(this_img)};
+				else console.log("next time around");
+				}, 1500);
 			});
 		});
->>>>>>> SRC woes
 		</script>
 	</head>
 	
 	<div id="body">
 		<div id="container">
-				<!--<div id="card"></div> <!--style="height: 100px;" style="width: 150"-->
 		
 				<div id="photo_container"></div> <!--script callback function appends elements from shuffledAlbum-->
-		
-				<div id="dump"></div>
+
 				
-				<div id="refresh" ><input type="submit" value="Reset" id="Refresh_button"></input></div>
+				<div class="refresh" ><button type="button" id="Refresh_button">Shuffle</button></div> <!--changes to Reshuffle after the first click-->
 		</div>
 		
 	</div>

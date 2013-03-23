@@ -1,5 +1,5 @@
-#container{
-  width: 900px;
+#container{ /*parent to photo_container and .refresh*/
+	width: 900px;
 	height: 800px;
 	color: #83b8b3;
     margin-left: 24px;
@@ -12,35 +12,45 @@
     background: #333333;
 }
 
-#invisible_box{
-	width: 800px;
-	height: 700px;
+#photo_container{ /*parent to .flip_content*/
 	position: relative;
-	top: 50px;
-	left: 50px;
+	top:70px;
+	left:70px;
 }
 
-#card{
+
+.flip_content{ /*parent for img (.front, .back)*/
 	display: inline-block;
+	width: 160px;
+	height: 110px;
+	position: relative;
+	padding: 20px;
+}
+
+.refresh{ /*first parent to Refresh_button*/
+	position: absolute;
+	bottom: 40px;
+	left: 427px;
+}
+
+.new_refresh{ /* second parent to Refresh_button*/
+	position: absolute;
+	bottom: 40px;
+	left: 421px;
+}
+
+img{
+	position: absolute;
+	top: 0;
+	left: 0;
 	width: 150px;
 	height: 100px;
-	position: absolute;
-	padding: 12px;
-	transform: rotate(90deg);
-	-ms-transform: rotate(90deg);
-	-moz-transform:rotate(90deg);
-	-webkit-transform:rotate(90deg);
-	-o-transform:rotate(90deg);
+	border-radius: 5px;
 }
 
-#photo_container{
-	position: absolute;
-	top:400px;
-	left:350px;
+#Refresh_button{
+	background:#C5CBCA;
+	border-radius: 3px;
+	text-align: center;
 }
 
-#refresh{
-	position: absolute;
-	bottom: 0px;
-	left: 350px;
-}
