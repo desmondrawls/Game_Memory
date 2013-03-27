@@ -1,195 +1,130 @@
-<html> <!--Simulates the card game 'Memory' using photos of furniture I built for my Sister-->
+ <html> <!--Simulates the card game 'Memory' using photos-->
 	<head>
-		<link rel="stylesheet" href="style.css" type="text/css">
 		<script src="http://code.jquery.com/jquery-1.7.1.js"></script>
-		<script type="text/javascript">
-			$(document).ready(function(){
-				var myAlbum = new Array(); //add a while loop var i =0; var j=0 (i<10){myAlbum[i]=("images/album/" + "j" + ".jpeg"); i++; if(i%2!=0){j++};
-						myAlbum[0] = new Image();
-						myAlbum[0].src = "images/album/0.jpg";
-						
-						myAlbum[1] = new Image();
-						myAlbum[1].src = "images/album/0.jpg";
-						
-						myAlbum[2] = new Image();
-						myAlbum[2].src = "images/album/1.jpg";
-						
-						myAlbum[3] = new Image();
-						myAlbum[3].src = "images/album/1.jpg";
-						
-						myAlbum[4] = new Image();
-						myAlbum[4].src = "images/album/2.jpg";
-					
-						myAlbum[5] = new Image();
-						myAlbum[5].src = "images/album/2.jpg";
-						
-						myAlbum[6] = new Image();
-						myAlbum[6].src = "images/album/3.jpg";
-						
-						myAlbum[7] = new Image();
-						myAlbum[7].src = "images/album/3.jpg";
-						
-						myAlbum[8] = new Image();
-						myAlbum[8].src = "images/album/4.jpg";
-						
-						myAlbum[9] = new Image();
-						myAlbum[9].src = "images/album/4.jpg";
-						
-						myAlbum[10] = new Image();
-						myAlbum[10].src = "images/album/5.jpg";
-						
-						myAlbum[11] = new Image();
-						myAlbum[11].src = "images/album/5.jpg";
-						
-						myAlbum[12] = new Image();
-						myAlbum[12].src = "images/album/6.jpg";
-						
-						myAlbum[13] = new Image();
-						myAlbum[13].src = "images/album/6.jpg";
-						
-						myAlbum[14] = new Image();
-						myAlbum[14].src = "images/album/7.jpg";
-						
-						myAlbum[15] = new Image();
-						myAlbum[15].src = "images/album/7.jpg";
-						
-					var cardAlbum = new Array();
-						cardAlbum[0] = new Image();
-						cardAlbum[0].src = "images/card.jpg";
-						
-						cardAlbum[1] = new Image();
-						cardAlbum[1].src = "images/card.jpg";
-						
-						cardAlbum[2] = new Image();
-						cardAlbum[2].src = "images/card.jpg";
-						
-						cardAlbum[3] = new Image();
-						cardAlbum[3].src = "images/card.jpg";
-						
-						cardAlbum[4] = new Image();
-						cardAlbum[4].src = "images/card.jpg";
-					
-						cardAlbum[5] = new Image();
-						cardAlbum[5].src = "images/card.jpg";
-						
-						cardAlbum[6] = new Image();
-						cardAlbum[6].src = "images/card.jpg";
-						
-						cardAlbum[7] = new Image();
-						cardAlbum[7].src = "images/card.jpg";
-						
-						cardAlbum[8] = new Image();
-						cardAlbum[8].src = "images/card.jpg";
-						
-						cardAlbum[9] = new Image();
-						cardAlbum[9].src = "images/card.jpg";
-						
-						cardAlbum[10] = new Image();
-						cardAlbum[10].src = "images/card.jpg";
-						
-						cardAlbum[11] = new Image();
-						cardAlbum[11].src = "images/card.jpg";
-						
-						cardAlbum[12] = new Image();
-						cardAlbum[12].src = "images/card.jpg";
-						
-						cardAlbum[13] = new Image();
-						cardAlbum[13].src = "images/card.jpg";
-						
-						cardAlbum[14] = new Image();
-						cardAlbum[14].src = "images/card.jpg";
-						
-						cardAlbum[15] = new Image();
-						cardAlbum[15].src = "images/card.jpg";
-					Array.prototype.shuffle = function shuffle(){
-						var tempSlot;
-						var randomNumber;
-						for (var i = 0; i != this.length; i++){
-							randomNumber = Math.floor(Math.random() * this.length);
-							tempSlot = this[i];
-							this[i] = this[randomNumber];
-							this[randomNumber] = tempSlot;	
-							}
-								return this;
-					};
-				$('.refresh').on('click', '#Refresh_button', function() {
-					var leftovers = $("#photo_container").children().length;
-					if (leftovers > 0){
-						$('.flip_content').remove();
-						}
-					var shuffledAlbum = myAlbum.shuffle();
-					for (i=0; i<shuffledAlbum.length; i++) { 
-						var img = shuffledAlbum[i];
-						img.className="deep_img"; //used to find the img in the second script
-						var card = cardAlbum[i];
-						var front = document.createElement('div');
-						front.className = "front";
-						front.appendChild(card); 
-						var back = document.createElement('div')
-						back.className="back";
-						back.appendChild(img);
-						var element = document.createElement('div');
-						element.className="flip_content";
-						element.appendChild(front);
-						element.appendChild(back); //back is on top because it was loaded last
-						document.getElementById("photo_container").appendChild(element);
-					}
-					$('.deep_img').hide();
-					(this).innerHTML = 'Reshuffle'; //changes shuffle to reshuffle
-					(this).parentNode.setAttribute("class", "new_refresh"); //re-centers the new button
-				});
+		<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone-min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/backbone.marionette/1.0.0-rc6-bundled/backbone.marionette.min.js"></script>
+		<!--<link rel="stylesheet" href="style.css" type="text/css">-->
+		<script> 
+		$(function(){
+		var Card = Backbone.Model.extend({ ///////////////////////////////////////////////ModelClass
+			defaults: {
+				is_flipped: false,
+				img: null,
+				index: null
+			}
+		});
+		
+		var Board = Backbone.Collection.extend({    //////////////////////////////////////CollectionClass
+			model: Card,
+			/*shuffle: function(){
+				var tempSlot;
+				var randomNumber = Math.floor(Math.random() * this.length);
+				this.model.set({index, randomNumber});
+			}*/
+		});
+		
+		/* imageClicked: function(e){
+		 * 	e.preventDefault();
+		 * var id = $(e.currentTarget).data("id"); ---in the template anchor he added data-id="${id}" html5
+		 */
+		
+		//ImageGallery.vent = _.extend({}, Backbone.Events);
+		
+		var CardView = Backbone.Marionette.ItemView.extend({  //////////////////////////////ItemView
+			template: "#card-tmpl",
+			templateHelpers: {
 				
-
-			});
-			
-		</script>
-		<script type="text/javascript">
-		$(document).ready(function(){
-			var temp_pusher = new Array();
-    		$("#photo_container").on('click', '.flip_content', function(){
-				var this_img = $(this).find('.deep_img');
-				this_img.show();
-				var this_src = this_img.attr('src');
-				var this_str = String(this_src);
-				temp_pusher.push(this_str);
-				temp_pusher.push(this_img);
-				console.log(temp_pusher[0]);
-				console.log(temp_pusher[1]);
-				console.log(temp_pusher[2]);
-				console.log(temp_pusher[3]);
-				//window.alert (this_str);
-				console.log(this_str);
-				setTimeout(function(){
-				if (temp_pusher.length>3){
-					if (temp_pusher[0] == temp_pusher[2]){ //if the two clicked images are the same l
-						//window.alert("SAME");
-						temp_pusher.pop();
-						temp_pusher.pop();
-						temp_pusher.pop();
-						temp_pusher.pop();
-					}
-					else {
-						//window.alert("NOT THE SAME");
-						temp_pusher.pop().hide(); //hide image from myAlbum
-						temp_pusher.pop(); //pop off src string for image from myAlbum
-						temp_pusher.pop().hide(); //hide image from myAlbum
-						temp_pusher.pop(); //pop off src string for image from myAlbum
+				getCardImage: function() {
+					if(!this.is_flipped) {
+						return "images/card.jpg";
+					} else {
+						return this.img;
 					}
 				}
-				else console.log("next time around");
-				}, 1500);
-			});
+			},
+			className: "card",
+			events: {
+				"click": "flipCard"
+			},
+			flipCard: function(){
+				App.vent.trigger("card:flip", this.model);
+				var is_flipped = this.model.get("is_flipped");
+				var which_card = this.model.get("img");
+				console.log(which_card);
+				this.model.set({is_flipped: !is_flipped});
+				this.render();
+			}
 		});
+		
+		
+		var BoardView = Backbone.Marionette.CollectionView.extend({ //////////////////////CollectionView
+			itemView: CardView,
+			initialize: function(Board){
+				App.vent.on("card:flip", function(Card){
+					console.log("flipping");
+					console.log(face_up);
+				});
+			}
+			
+			/*comparator: function(Card){
+				return Card.get("index");
+			},
+			
+			onSuccess: function (){
+				this.collection.sort();
+			}*/
+			
+		});
+		
+		
+		var TheBoard = new Board();/////////////////////////////////////////////////////////NewCollection
+		
+		
+		var face_up = TheBoard.where({is_flipped: "false"});
+		console.log(face_up.length);
+		
+		
+		var App = new Backbone.Marionette.Application();////////////////////////////////////NewApp
+		
+		
+		App.addRegions({ ///////////////////////////////////////////////////////////////////addRegion
+			board: '#container'
+		});
+		
+		
+		App.addInitializer(function(){//////////////////////////////////////////////////////addInitializer
+			_.each(_.range(8), function(i){
+				var card = new Card({////////////////////////////////////////////////////////NewModel
+					img: "images/album/" + i + ".jpg"
+				});
+				var duplicate = card.clone();
+				TheBoard.push(card);
+				TheBoard.push(duplicate);
+			});
+			TheBoard.shuffle(); ////////////////////////////I haven't defined the shuffle() function yet. It would go in BoardView
+			var this_board_view = new BoardView({
+				collection: TheBoard
+			});
+			console.log(App);
+			App.board.show(this_board_view);
+		});
+		
+		
+		App.start();///////////////////////////////////////////////////////////////////////////Start
+		});
+		
 		</script>
+	<script type="text/html" id="card-tmpl">
+		<div><img src="<%= getCardImage() %>" style="width: 100px; height: 150px"></div>
+		
+	</script>
 	</head>
 	
 	<div id="body">
 		<div id="container">
 		
-				<div id="photo_container"></div> <!--script callback function appends elements from shuffledAlbum-->
-
-				
-				<div class="refresh" ><button type="button" id="Refresh_button">Shuffle</button></div> <!--changes to Reshuffle after the first click-->
+				<div id="refresh" ><input type="submit" value="Refresh" id="Refresh_button"></input></div>
 		</div>
 		
 	</div>
